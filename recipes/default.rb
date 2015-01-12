@@ -17,7 +17,9 @@
 # limitations under the License.
 #
 
-include_recipe "java"
 include_recipe "chocolatey"
 
+chocolatey 'java.jdk'
+chocolatey 'maven'
+chocolatey 'git'
 chocolatey 'eclipse'
