@@ -26,19 +26,25 @@ chocolatey 'eclipse'
 
 chocolatey 'virtualbox'
 
-chocolatey 'rubygems'
+chocolatey 'ruby'
 chocolatey 'ruby2.devkit'
+chocolatey 'rubygems'
+
 chocolatey 'vagrant'
 
 chocolatey 'putty'
 
-#template "c:\bin\DevKit\config.yml" do
+# find where choco installed Ruby2
+rubyDir = Dir.glob("/bin/**/ruby")
+# find where choco installed Ruby2 DevKit
+devKitDir = Dir.glob("/bin/**/DevKit2")
+
+# now overwrite its config.yml file
+configFile = Pathname.new( devKitDir ).join( "config.yml" )
+
+#template configFile.to_s do
 #  source "ruby2devkit-config.yml.erb"
-#  mode '0440'
-#  owner 'root'
-#  group 'root'
 #  variables({
-#     :sudoers_groups => node[:authorization][:sudo][:groups],
-#     :sudoers_users => node[:authorization][:sudo][:users]
+#     :rubyDir => rubyDir.to_s
 #  })
 #end
