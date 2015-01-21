@@ -23,3 +23,22 @@ chocolatey 'java.jdk'
 chocolatey 'maven'
 chocolatey 'git'
 chocolatey 'eclipse'
+
+chocolatey 'virtualbox'
+
+chocolatey 'rubygems'
+chocolatey 'ruby2.devkit'
+chocolatey 'vagrant'
+
+chocolatey 'putty'
+
+#template "c:\bin\DevKit\config.yml" do
+#  source "ruby2devkit-config.yml.erb"
+#  mode '0440'
+#  owner 'root'
+#  group 'root'
+#  variables({
+#     :sudoers_groups => node[:authorization][:sudo][:groups],
+#     :sudoers_users => node[:authorization][:sudo][:users]
+#  })
+#end
