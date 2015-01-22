@@ -35,16 +35,16 @@ chocolatey 'vagrant'
 chocolatey 'putty'
 
 # find where choco installed Ruby2
-#rubyDir = Dir.glob("/bin/**/ruby").first()
+rubyDir = Pathname.new("/tools/ruby215")
 # find where choco installed Ruby2 DevKit
-#devKitDir = Dir.glob("/bin/**/DevKit2").first()
+devKitDir = Pathname.new("/bin/DevKit2")
 
 # now overwrite its config.yml file
-#configFile = Pathname.new( devKitDir ).join( "config.yml" )
+configFile = Pathname.new( devKitDir ).join( "config.yml" )
 
-#template configFile.to_s do
-#  source "ruby2devkit-config.yml.erb"
-#  variables({
-#     :rubyDir => rubyDir.to_s
-#  })
-#end
+template configFile.to_s do
+  source "ruby2devkit-config.yml.erb"
+  variables({
+     :rubyDir => rubyDir.to_s
+  })
+end
