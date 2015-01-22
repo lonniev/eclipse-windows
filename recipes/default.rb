@@ -19,9 +19,11 @@
 
 include_recipe "chocolatey"
 
-chocolatey 'java.jdk'
+chocolatey 'jdk7'
+chocolatey 'jdk8'
 chocolatey 'maven'
 chocolatey 'git'
+
 chocolatey 'eclipse'
 
 chocolatey 'virtualbox'
@@ -34,17 +36,26 @@ chocolatey 'vagrant'
 
 chocolatey 'putty'
 
-# find where choco installed Ruby2
-rubyDir = Pathname.new("/tools/ruby215")
-# find where choco installed Ruby2 DevKit
-devKitDir = Pathname.new("/bin/DevKit2")
+chocolatey 'google-chrome-x64'
 
-# now overwrite its config.yml file
-configFile = Pathname.new( devKitDir ).join( "config.yml" )
-
-template configFile.to_s do
-  source "ruby2devkit-config.yml.erb"
-  variables({
-     :rubyDir => rubyDir.to_s
-  })
+# tests for installation directories have to be within ruby blocks
+# because non-ruby-block code runs before rather than during the
+# resources executions
+ruby_block "couple Ruby and its DevKit" do
+  block do
+    # find where choco installed Ruby2
+    rubyDir = Pathname.new("/tools/ruby215")
+    # find where choco installed Ruby2 DevKit
+    devKitDir = Pathname.new("/bin/DevKit2")
+    
+    # now overwrite its config.yml file
+    configFile = Pathname.new( devKitDir ).join( "config.yml" )
+    
+    template configFile.to_s do
+      source "ruby2devkit-config.yml.erb"
+      variables({
+         :rubyDir => rubyDir.to_s
+      })
+    end
+  end
 end
